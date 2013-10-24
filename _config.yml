@@ -1,5 +1,5 @@
-title:            Site Title
-description:      Describe your website here.
+title:            Dear Lukie
+description:      Letters
 logo:             site-logo.png
 disqus_shortname: 
 search:           true
@@ -8,18 +8,13 @@ search:           true
 
 # Owner/author information
 owner:
-  name:           Your Name
+  name:           Dave Chan
   avatar:         bio-photo.jpg
-  email:          you@email.com
+  email:          chichan1@gmail.com
   # Social networking links used in footer. Update and remove as you like.
   twitter:        
-  facebook:       
   github:         
-  stackexchange:  
   linkedin:       
-  instagram:      
-  flickr:         
-  tumblr:         
   # For Google Authorship https://plus.google.com/authorship
   google_plus:    
 
@@ -34,18 +29,16 @@ bing_verify:
 links:
   - title: About
     url: /about
-  - title: Articles
+  - title: Letters
     url: /articles
-  - title: Theme Setup
-    url: /theme-setup
-  - title: Made Mistakes
-    url: http://mademistakes.com
+  - title: Link
+    url: http://davechanbi.com
     external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    America/New_York
+timezone:    Asia/Hong_Kong
 future:      true
-pygments:    true
+pygments:    false
 markdown:    kramdown
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
