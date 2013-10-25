@@ -1,6 +1,6 @@
-title:            Dear Lukie
-description:      Letters
-logo:             site-logo.png
+title:            Dear Lukie,
+description:      Letters to our boy about the search for personal truths.
+logo:             lukie-logo.png
 disqus_shortname: 
 search:           true
 #Comment out url when working locally to resolve base urls correctly
@@ -9,7 +9,7 @@ url:              http://davechanbi.com
 # Owner/author information
 owner:
   name:           Dave Chan
-  avatar:         bio-photo.jpg
+  avatar:         davechan-photo.jpg
   email:          chichan1@gmail.com
   # Social networking links used in footer. Update and remove as you like.
   twitter:        "daveillo"
