@@ -31,8 +31,8 @@ links:
     url: /about
   - title: Letters
     url: /articles
-  - title: Link
-    url: http://davechanbi.com
+  - title: Theme
+    url: http://mmistakes.github.io/so-simple-theme/theme-setup/
     external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
