@@ -4,7 +4,7 @@ logo:             lukie-logo.png
 disqus_shortname: dearlukie
 search:           true
 #Comment out url when working locally to resolve base urls correctly
-url:              http://www.davechanbi.com
+url:              http://davechanbi.com
 
 # Owner/author information
 owner:
