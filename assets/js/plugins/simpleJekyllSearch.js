@@ -1,27 +1,19 @@
-/*global jQuery */
-/*!
-* Simple Jekyll Search
-* Christian Fei - https://github.com/christian-fei/Simple-Jekyll-Search *
-*
-*/
-
 (function($) {
     $.fn.simpleJekyllSearch = function(options) {
         var settings = $.extend({
-            jsonFile        : '/search.json',
-            jsonFormat      : 'title,category,desc,url,date,shortdate',
-            template        : '<a href="{url}" title="{title}">{title}</a>',
-            searchResults   : '.results',
-            searchResultsTitle   : '<h4>Search results</h4>',
-            limit           : '10',
-            noResults       : '<p>Oh shucks<br/><small>Nothing found :(</small></p>'
+            jsonFile            : '/search.json',
+            template            : '<a href="{url}" title="{desc}">{title}</a>',
+            searchResults       : '.results',
+            searchResultsTitle  : '<h4>Search results</h4>',
+            limit               : '10',
+            noResults           : '<p>Oh shucks<br/><small>Nothing found :(</small></p>'
         }, options);
 
-        var properties = settings.jsonFormat.split(',');
-        
         var jsonData = [],
             origThis = this,
             searchResults = $(settings.searchResults);
+
+        var matches = [];
 
         if(settings.jsonFile.length && searchResults.length){
             $.ajax({
@@ -42,9 +34,15 @@
             });
         }
 
-
         function registerEvent(){
             origThis.keyup(function(e){
+                if(e.which === 13){
+                    if(matches)
+                        window.location = matches[0].url;
+                        
+                    //follow the first link
+                    // if(searchResults.children().length)
+                }
                 if($(this).val().length){
                     writeMatches( performSearch($(this).val()) );
                 }else{
@@ -54,41 +52,38 @@
         }
 
         function performSearch(str){
-            var matches = [];
+            matches = [];
 
-            $.each(jsonData,function(i,entry){
-                for(var i=0;i<properties.length;i++)
-                    if(entry[properties[i]] !== undefined && entry[properties[i]].toLowerCase().indexOf(str.toLowerCase()) > 1){
-                        matches.push(entry);
-                        i=properties.length;
+            for (var i = 0; i < jsonData.length; i++) {
+                var obj = jsonData[i];
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key) && obj[key].toLowerCase().indexOf(str.toLowerCase()) >= 0){
+                        matches.push(obj);
+                        break;
                     }
-            });
+                }
+            }
             return matches;
-
         }
 
         function writeMatches(m){
             clearSearchResults();
+
             searchResults.append( $(settings.searchResultsTitle) );
 
-            if(m.length){
-                $.each(m,function(i,entry){
-                    if(i<settings.limit){
-                        var output=settings.template;
-                        for(var i=0;i<properties.length;i++){
-                            var regex = new RegExp("\{" + properties[i] + "\}", 'g');
-                            output = output.replace(regex, entry[properties[i]]);
-                        }
-                        searchResults.append($(output));
-                    }
-                });
+            if(m && m.length){
+                for (var i = 0; i < m.length && i < settings.limit; i++) {
+                    var obj = m[i];
+                    output = settings.template;
+                    output = output.replace(/\{(.*?)\}/g, function(match, property) {
+                        return obj[property];
+                    });
+                    searchResults.append($(output));
+                }
             }else{
                 searchResults.append( settings.noResults );
             }
-
-
         }
-
         function clearSearchResults(){
             searchResults.children().remove();
         }
